@@ -1,726 +1,998 @@
 {
-  "info": {
-    "_postman_id": "b70d14c4-7bf4-474f-90fb-c8d5e6d24b92",
-    "name": "Bill Generation Soft Check",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": "Successful flows and current endpoint checks for the updated multi-item billing project."
-  },
-  "item": [
-    {
-      "name": "Products",
-      "item": [
-        {
-          "name": "Add Product - Notebook",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Notebook\",\n  \"quantity\": 50,\n  \"price\": 99.99,\n  \"threshold\": 10\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:8080/admin/products",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "products"
+    "info":  {
+                 "_postman_id":  "b70d14c4-7bf4-474f-90fb-c8d5e6d24b92",
+                 "name":  "Bill Generation Soft Check",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+                 "description":  "Successful flows and current endpoint checks for the updated multi-item billing project."
+             },
+    "item":  [
+                 {
+                     "name":  "Products",
+                     "item":  [
+                                  {
+                                      "name":  "Add Product - Notebook",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"name\": \"Notebook\",\n  \"quantity\": 50,\n  \"price\": 99.99,\n  \"threshold\": 10\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/products",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "products"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Bulk Add Products - Pen And Eraser",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "[\n  {\n    \"name\": \"Pen\",\n    \"quantity\": 5,\n    \"price\": 12.50,\n    \"threshold\": 4\n  },\n  {\n    \"name\": \"Eraser\",\n    \"quantity\": 20,\n    \"price\": 5.00,\n    \"threshold\": 3\n  }\n]",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/products/bulk",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "products",
+                                                                               "bulk"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Products",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/products",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "products"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Product By Id",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/products/1",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "products",
+                                                                               "1"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Products Page",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/products/page?page=0\u0026size=20",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "products",
+                                                                               "page"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "page",
+                                                                                    "value":  "0"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "size",
+                                                                                    "value":  "20"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Patch Quantity - Increase",
+                                      "request":  {
+                                                      "method":  "PATCH",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"quantity\": 25\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/products/1/quantity",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "products",
+                                                                               "1",
+                                                                               "quantity"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Patch Quantity - Zero No-op",
+                                      "request":  {
+                                                      "method":  "PATCH",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"quantity\": 0\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/products/1/quantity",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "products",
+                                                                               "1",
+                                                                               "quantity"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Put Product - Replace",
+                                      "request":  {
+                                                      "method":  "PUT",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"name\": \"Notebook Premium\",\n  \"quantity\": 40,\n  \"price\": 119.99,\n  \"threshold\": 8\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/products/1",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "products",
+                                                                               "1"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Low Stock Products",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/products/low-stock",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "products",
+                                                                               "low-stock"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Delete Product - Success",
+                                      "request":  {
+                                                      "method":  "DELETE",
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/products/3",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "products",
+                                                                               "3"
+                                                                           ]
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Orders",
+                     "item":  [
+                                  {
+                                      "name":  "Place Order - Success Multi Item",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     },
+                                                                     {
+                                                                         "key":  "X-Idempotency-Key",
+                                                                         "value":  "soft-check-order-001"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"customerName\": \"John Doe\",\n  \"mobileNo\": \"+919157576177\",\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 2,\n      \"discountAmount\": 10.00\n    },\n    {\n      \"productId\": 2,\n      \"quantity\": 1,\n      \"discountAmount\": 0\n    }\n  ]\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/orders",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Place Order - Idempotent Replay",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     },
+                                                                     {
+                                                                         "key":  "X-Idempotency-Key",
+                                                                         "value":  "soft-check-order-001"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"customerName\": \"John Doe\",\n  \"mobileNo\": \"+919157576177\",\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 2,\n      \"discountAmount\": 10.00\n    },\n    {\n      \"productId\": 2,\n      \"quantity\": 1,\n      \"discountAmount\": 0\n    }\n  ]\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/orders",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Order By Id",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/orders/1",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "orders",
+                                                                               "1"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Admin Orders",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/orders",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "orders"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Admin Orders Page",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/orders/page?customerName=John\u0026paymentStatus=SUCCESS\u0026orderStatus=PLACED\u0026page=0\u0026size=20",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "orders",
+                                                                               "page"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "customerName",
+                                                                                    "value":  "John"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "paymentStatus",
+                                                                                    "value":  "SUCCESS"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "orderStatus",
+                                                                                    "value":  "PLACED"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "page",
+                                                                                    "value":  "0"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "size",
+                                                                                    "value":  "20"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Place Order - Duplicate Product Lines Merged",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     },
+                                                                     {
+                                                                         "key":  "X-Idempotency-Key",
+                                                                         "value":  "soft-check-order-merge-001"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/orders",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              },
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"customerName\": \"Merge Case\",\n  \"mobileNo\": \"+919157576177\",\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 1,\n      \"discountAmount\": 5.00\n    },\n    {\n      \"productId\": 1,\n      \"quantity\": 2,\n      \"discountAmount\": 3.00\n    }\n  ]\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Place Order - Null Discount Defaults To Zero",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     },
+                                                                     {
+                                                                         "key":  "X-Idempotency-Key",
+                                                                         "value":  "soft-check-order-null-discount-001"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/orders",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              },
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"customerName\": \"Null Discount\",\n  \"mobileNo\": \"+919157576177\",\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 1,\n      \"discountAmount\": null\n    }\n  ]\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Place Order - Blank Idempotency Key Treated As Fresh Request",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     },
+                                                                     {
+                                                                         "key":  "X-Idempotency-Key",
+                                                                         "value":  "   "
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/orders",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              },
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"customerName\": \"Blank Idempotency\",\n  \"mobileNo\": \"+919157576177\",\n  \"items\": [\n    {\n      \"productId\": 2,\n      \"quantity\": 1,\n      \"discountAmount\": 0\n    }\n  ]\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Bills",
+                     "item":  [
+                                  {
+                                      "name":  "Get Bill By Id",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/bills/1",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "bills",
+                                                                               "1"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Bill By Number",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/bills/number/BILL-EXAMPLE",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "bills",
+                                                                               "number",
+                                                                               "BILL-EXAMPLE"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Admin Bills",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/bills",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "bills"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Admin Bills Page",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/bills/page?customerName=John\u0026billNo=BILL-EXAMPLE\u0026page=0\u0026size=20",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "bills",
+                                                                               "page"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "customerName",
+                                                                                    "value":  "John"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "billNo",
+                                                                                    "value":  "BILL-EXAMPLE"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "page",
+                                                                                    "value":  "0"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "size",
+                                                                                    "value":  "20"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "Reports And Audit",
+                     "item":  [
+                                  {
+                                      "name":  "Get Stock Report CSV",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "text/csv"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/reports/stock",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "reports",
+                                                                               "stock"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Orders Report CSV",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "text/csv"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/reports/orders",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "reports",
+                                                                               "orders"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Bills Report CSV",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "text/csv"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/reports/bills",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "reports",
+                                                                               "bills"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Audit Logs Page",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/audit-logs/page?entityType=ORDER\u0026page=0\u0026size=20",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "audit-logs",
+                                                                               "page"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "entityType",
+                                                                                    "value":  "ORDER"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "page",
+                                                                                    "value":  "0"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "size",
+                                                                                    "value":  "20"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Get Audit Logs Page By Event Type",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Accept",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "http://localhost:8080/admin/audit-logs/page?entityType=ORDER\u0026eventType=PAYMENT\u0026page=0\u0026size=20",
+                                                                  "protocol":  "http",
+                                                                  "host":  [
+                                                                               "localhost"
+                                                                           ],
+                                                                  "port":  "8080",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "audit-logs",
+                                                                               "page"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "entityType",
+                                                                                    "value":  "ORDER"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "eventType",
+                                                                                    "value":  "PAYMENT"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "page",
+                                                                                    "value":  "0"
+                                                                                },
+                                                                                {
+                                                                                    "key":  "size",
+                                                                                    "value":  "20"
+                                                                                }
+                                                                            ]
+                                                              },
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               }
+                                                  }
+                                  }
+                              ]
+                 }
+             ],
+    "event":  [
+                  {
+                      "listen":  "test",
+                      "script":  {
+                                     "type":  "text/javascript",
+                                     "exec":  [
+                                                  "const requestName = pm.info.requestName;",
+                                                  "const statusMap = {",
+                                                  "  \u0027Add Product - Notebook\u0027: 200,",
+                                                  "  \u0027Bulk Add Products - Pen And Eraser\u0027: 200,",
+                                                  "  \u0027Get Products\u0027: 200,",
+                                                  "  \u0027Get Product By Id\u0027: 200,",
+                                                  "  \u0027Get Products Page\u0027: 200,",
+                                                  "  \u0027Patch Quantity - Increase\u0027: 200,",
+                                                  "  \u0027Patch Quantity - Zero No-op\u0027: 200,",
+                                                  "  \u0027Put Product - Replace\u0027: 200,",
+                                                  "  \u0027Get Low Stock Products\u0027: 200,",
+                                                  "  \u0027Delete Product - Success\u0027: 204,",
+                                                  "  \u0027Place Order - Success Multi Item\u0027: 200,",
+                                                  "  \u0027Place Order - Idempotent Replay\u0027: 200,",
+                                                  "  \u0027Place Order - Duplicate Product Lines Merged\u0027: 200,",
+                                                  "  \u0027Place Order - Null Discount Defaults To Zero\u0027: 200,",
+                                                  "  \u0027Place Order - Blank Idempotency Key Treated As Fresh Request\u0027: 200,",
+                                                  "  \u0027Get Order By Id\u0027: 200,",
+                                                  "  \u0027Get Admin Orders\u0027: 200,",
+                                                  "  \u0027Get Admin Orders Page\u0027: 200,",
+                                                  "  \u0027Get Bill By Id\u0027: 200,",
+                                                  "  \u0027Get Bill By Number\u0027: 200,",
+                                                  "  \u0027Get Admin Bills\u0027: 200,",
+                                                  "  \u0027Get Admin Bills Page\u0027: 200,",
+                                                  "  \u0027Get Stock Report CSV\u0027: 200,",
+                                                  "  \u0027Get Orders Report CSV\u0027: 200,",
+                                                  "  \u0027Get Bills Report CSV\u0027: 200,",
+                                                  "  \u0027Get Audit Logs Page\u0027: 200,",
+                                                  "  \u0027Get Audit Logs Page By Event Type\u0027: 200",
+                                                  "};",
+                                                  "const expected = statusMap[requestName];",
+                                                  "pm.test(\u0027Expected status code\u0027, function () {",
+                                                  "  pm.expect(expected, \u0027Missing expected status mapping for \u0027 + requestName).to.not.equal(undefined);",
+                                                  "  pm.response.to.have.status(expected);",
+                                                  "});",
+                                                  "const csvRequests = new Set([\u0027Get Stock Report CSV\u0027, \u0027Get Orders Report CSV\u0027, \u0027Get Bills Report CSV\u0027]);",
+                                                  "pm.test(\u0027Expected content type\u0027, function () {",
+                                                  "  const contentType = (pm.response.headers.get(\u0027Content-Type\u0027) || \u0027\u0027).toLowerCase();",
+                                                  "  if (expected === 204) {",
+                                                  "    return;",
+                                                  "  }",
+                                                  "  if (csvRequests.has(requestName)) {",
+                                                  "    pm.expect(contentType).to.include(\u0027text/csv\u0027);",
+                                                  "  } else {",
+                                                  "    pm.expect(contentType).to.include(\u0027application/json\u0027);",
+                                                  "  }",
+                                                  "});",
+                                                  "if (expected !== 204 \u0026\u0026 !csvRequests.has(requestName)) {",
+                                                  "  const body = pm.response.json();",
+                                                  "  pm.test(\u0027JSON body is present\u0027, function () {",
+                                                  "    pm.expect(body).to.not.equal(null);",
+                                                  "  });",
+                                                  "  if (requestName.includes(\u0027Page\u0027)) {",
+                                                  "    pm.test(\u0027Page response shape\u0027, function () {",
+                                                  "      pm.expect(body).to.have.property(\u0027items\u0027);",
+                                                  "      pm.expect(body.items).to.be.an(\u0027array\u0027);",
+                                                  "      pm.expect(body).to.have.property(\u0027page\u0027);",
+                                                  "      pm.expect(body).to.have.property(\u0027size\u0027);",
+                                                  "      pm.expect(body).to.have.property(\u0027totalElements\u0027);",
+                                                  "      pm.expect(body).to.have.property(\u0027totalPages\u0027);",
+                                                  "    });",
+                                                  "  }",
+                                                  "  if (requestName === \u0027Place Order - Success Multi Item\u0027) {",
+                                                  "    pm.collectionVariables.set(\u0027soft_success_order_id\u0027, String(body.id));",
+                                                  "    pm.collectionVariables.set(\u0027soft_success_bill_id\u0027, body.billId ? String(body.billId) : \u0027\u0027);",
+                                                  "    pm.test(\u0027Successful order response shape\u0027, function () {",
+                                                  "      pm.expect(body.orderStatus).to.equal(\u0027PLACED\u0027);",
+                                                  "      pm.expect(body.paymentStatus).to.equal(\u0027SUCCESS\u0027);",
+                                                  "      pm.expect(body.idempotencyKey).to.equal(\u0027soft-check-order-001\u0027);",
+                                                  "    });",
+                                                  "  }",
+                                                  "  if (requestName === \u0027Place Order - Idempotent Replay\u0027) {",
+                                                  "    pm.test(\u0027Replay returns the original order\u0027, function () {",
+                                                  "      pm.expect(body.id).to.equal(Number(pm.collectionVariables.get(\u0027soft_success_order_id\u0027)));",
+                                                  "      pm.expect(body.idempotencyKey).to.equal(\u0027soft-check-order-001\u0027);",
+                                                  "    });",
+                                                  "  }",
+                                                  "  if (requestName === \u0027Place Order - Duplicate Product Lines Merged\u0027) {",
+                                                  "    pm.test(\u0027Merged product lines still produce a valid order\u0027, function () {",
+                                                  "      pm.expect(body.orderStatus).to.equal(\u0027PLACED\u0027);",
+                                                  "      pm.expect(body.paymentStatus).to.equal(\u0027SUCCESS\u0027);",
+                                                  "      pm.expect(Number(body.finalAmount)).to.be.greaterThan(0);",
+                                                  "    });",
+                                                  "  }",
+                                                  "  if (requestName === \u0027Place Order - Null Discount Defaults To Zero\u0027) {",
+                                                  "    pm.test(\u0027Null discount request still succeeds\u0027, function () {",
+                                                  "      pm.expect(body.orderStatus).to.equal(\u0027PLACED\u0027);",
+                                                  "      pm.expect(body.paymentStatus).to.equal(\u0027SUCCESS\u0027);",
+                                                  "    });",
+                                                  "  }",
+                                                  "  if (requestName === \u0027Place Order - Blank Idempotency Key Treated As Fresh Request\u0027) {",
+                                                  "    pm.test(\u0027Blank idempotency key is normalized away\u0027, function () {",
+                                                  "      pm.expect(body.idempotencyKey).to.satisfy(function (value) { return value === null || value === undefined; });",
+                                                  "      pm.expect(body.orderStatus).to.equal(\u0027PLACED\u0027);",
+                                                  "    });",
+                                                  "  }",
+                                                  "}",
+                                                  "if (csvRequests.has(requestName)) {",
+                                                  "  pm.test(\u0027CSV body is not empty\u0027, function () {",
+                                                  "    pm.expect(pm.response.text().trim().length).to.be.greaterThan(0);",
+                                                  "  });",
+                                                  "}"
+                                              ]
+                                 }
+                  }
               ]
-            }
-          }
-        },
-        {
-          "name": "Bulk Add Products - Pen And Eraser",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "[\n  {\n    \"name\": \"Pen\",\n    \"quantity\": 5,\n    \"price\": 12.50,\n    \"threshold\": 4\n  },\n  {\n    \"name\": \"Eraser\",\n    \"quantity\": 20,\n    \"price\": 5.00,\n    \"threshold\": 3\n  }\n]",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:8080/admin/products/bulk",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "products",
-                "bulk"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Products",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/products",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "products"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Product By Id",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/products/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "products",
-                "1"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Products Page",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/products/page?page=0&size=20",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "products",
-                "page"
-              ],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "0"
-                },
-                {
-                  "key": "size",
-                  "value": "20"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Patch Quantity - Increase",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"quantity\": 25\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:8080/admin/products/1/quantity",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "products",
-                "1",
-                "quantity"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Patch Quantity - Zero No-op",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"quantity\": 0\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:8080/admin/products/1/quantity",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "products",
-                "1",
-                "quantity"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Put Product - Replace",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Notebook Premium\",\n  \"quantity\": 40,\n  \"price\": 119.99,\n  \"threshold\": 8\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:8080/admin/products/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "products",
-                "1"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Low Stock Products",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/products/low-stock",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "products",
-                "low-stock"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Delete Product - Success",
-          "request": {
-            "method": "DELETE",
-            "url": {
-              "raw": "http://localhost:8080/admin/products/3",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "products",
-                "3"
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Orders",
-      "item": [
-        {
-          "name": "Place Order - Success Multi Item",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "X-Idempotency-Key",
-                "value": "soft-check-order-001"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"customerName\": \"John Doe\",\n  \"mobileNo\": \"+919157576177\",\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 2,\n      \"discountAmount\": 10.00\n    },\n    {\n      \"productId\": 2,\n      \"quantity\": 1,\n      \"discountAmount\": 0\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:8080/orders",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "orders"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Place Order - Idempotent Replay",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "X-Idempotency-Key",
-                "value": "soft-check-order-001"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"customerName\": \"John Doe\",\n  \"mobileNo\": \"+919157576177\",\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 2,\n      \"discountAmount\": 10.00\n    },\n    {\n      \"productId\": 2,\n      \"quantity\": 1,\n      \"discountAmount\": 0\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:8080/orders",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "orders"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Order By Id",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/orders/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "orders",
-                "1"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Admin Orders",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/orders",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "orders"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Admin Orders Page",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/orders/page?customerName=John&paymentStatus=SUCCESS&orderStatus=PLACED&page=0&size=20",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "orders",
-                "page"
-              ],
-              "query": [
-                {
-                  "key": "customerName",
-                  "value": "John"
-                },
-                {
-                  "key": "paymentStatus",
-                  "value": "SUCCESS"
-                },
-                {
-                  "key": "orderStatus",
-                  "value": "PLACED"
-                },
-                {
-                  "key": "page",
-                  "value": "0"
-                },
-                {
-                  "key": "size",
-                  "value": "20"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Bills",
-      "item": [
-        {
-          "name": "Get Bill By Id",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/bills/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "bills",
-                "1"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Bill By Number",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/bills/number/BILL-EXAMPLE",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "bills",
-                "number",
-                "BILL-EXAMPLE"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Admin Bills",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/bills",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "bills"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Admin Bills Page",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/bills/page?customerName=John&billNo=BILL-EXAMPLE&page=0&size=20",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "bills",
-                "page"
-              ],
-              "query": [
-                {
-                  "key": "customerName",
-                  "value": "John"
-                },
-                {
-                  "key": "billNo",
-                  "value": "BILL-EXAMPLE"
-                },
-                {
-                  "key": "page",
-                  "value": "0"
-                },
-                {
-                  "key": "size",
-                  "value": "20"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Reports And Audit",
-      "item": [
-        {
-          "name": "Get Stock Report CSV",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/csv"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/reports/stock",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "reports",
-                "stock"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Orders Report CSV",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/csv"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/reports/orders",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "reports",
-                "orders"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Bills Report CSV",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/csv"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/reports/bills",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "reports",
-                "bills"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Audit Logs Page",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/admin/audit-logs/page?entityType=ORDER&page=0&size=20",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "admin",
-                "audit-logs",
-                "page"
-              ],
-              "query": [
-                {
-                  "key": "entityType",
-                  "value": "ORDER"
-                },
-                {
-                  "key": "page",
-                  "value": "0"
-                },
-                {
-                  "key": "size",
-                  "value": "20"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    }
-  ]
 }

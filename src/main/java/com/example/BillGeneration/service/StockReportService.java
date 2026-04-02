@@ -47,7 +47,7 @@ public class StockReportService {
         this.adminEmail = adminEmail;
     }
 
-    @Scheduled(cron = "${stock.report.cron:0 0 9 * * *}")
+    @Scheduled(cron = "${stock.report.cron:0 0 0 * * *}")
     public void sendDailyStockReport() {
         if (adminEmail == null || adminEmail.isBlank()) {
             log.warn("Skipping stock report email because admin.email is not configured");

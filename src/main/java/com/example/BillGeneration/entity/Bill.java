@@ -2,6 +2,7 @@ package com.example.BillGeneration.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -45,6 +46,6 @@ public class Bill {
     @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BillItem> items = new ArrayList<>();
 
-    @OneToOne(mappedBy = "bill")
+    @OneToOne(mappedBy = "bill", fetch = FetchType.LAZY)
     private OrderDetails orderDetails;
 }

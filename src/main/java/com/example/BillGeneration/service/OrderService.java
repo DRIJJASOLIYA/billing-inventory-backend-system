@@ -16,7 +16,6 @@ import com.example.BillGeneration.exception.BadRequestException;
 import com.example.BillGeneration.exception.ResourceNotFoundException;
 import com.example.BillGeneration.repository.BillRepository;
 import com.example.BillGeneration.repository.OrderRepository;
-import com.example.BillGeneration.repository.projection.OrderItemView;
 import com.example.BillGeneration.repository.projection.OrderSummaryView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -389,10 +388,14 @@ public class OrderService {
             log.warn("Skipping low stock email because admin.email is not configured");
             return;
         }
-        runAfterCommit(() -> dispatchNotifications("low stock email", List.of(notificationService.sendEmail(
+        runAfterCommit(() -> dispatchNotifications("low stock email", List.of(trackLowStockEmailNotification(
+                product,
                 adminEmail,
-                appProperties.getMessages().getLowStockSubject(),
-                createLowStockMessage(product)
+                notificationService.sendEmail(
+                        adminEmail,
+                        appProperties.getMessages().getLowStockSubject(),
+                        createLowStockMessage(product)
+                )
         ))));
     }
 
@@ -432,6 +435,25 @@ public class OrderService {
                     : throwable;
             auditLogService.record(ENTITY_NOTIFICATION, order.getId(), channel + "_SENT", "FAILED",
                     channel + " notification failed for " + recipient + ": " + cause.getMessage());
+        });
+    }
+
+    private CompletableFuture<Void> trackLowStockEmailNotification(
+            Product product,
+            String recipient,
+            CompletableFuture<Void> future
+    ) {
+        return future.whenComplete((ignored, throwable) -> {
+            if (throwable == null) {
+                auditLogService.record(ENTITY_NOTIFICATION, product.getId(), "LOW_STOCK_EMAIL_SENT", "SUCCESS",
+                        "Low stock email sent to " + recipient + " for product " + product.getName());
+                return;
+            }
+            Throwable cause = throwable instanceof CompletionException && throwable.getCause() != null
+                    ? throwable.getCause()
+                    : throwable;
+            auditLogService.record(ENTITY_NOTIFICATION, product.getId(), "LOW_STOCK_EMAIL_SENT", "FAILED",
+                    "Low stock email failed for " + recipient + ": " + cause.getMessage());
         });
     }
 
@@ -519,17 +541,13 @@ public class OrderService {
         if (summaries.isEmpty()) {
             return List.of();
         }
-        List<Long> orderIds = summaries.stream()
-                .map(OrderSummaryView::getOrderId)
-                .toList();
-        Map<Long, List<OrderItemResponse>> itemsByOrderId = mapOrderItems(orderRepository.findOrderItemsByOrderIds(orderIds));
-        List<OrderDetailsResponse> responses = new ArrayList<>();
+        List<OrderDetailsResponse> responses = new ArrayList<>(summaries.size());
         for (OrderSummaryView summary : summaries) {
             responses.add(new OrderDetailsResponse(
                     summary.getOrderId(),
                     summary.getCustomerName(),
                     summary.getMobileNo(),
-                    itemsByOrderId.getOrDefault(summary.getOrderId(), List.of()),
+                    List.of(),
                     summary.getTotalAmount(),
                     summary.getGst(),
                     summary.getFinalAmount(),
@@ -541,23 +559,6 @@ public class OrderService {
             ));
         }
         return responses;
-    }
-
-    private Map<Long, List<OrderItemResponse>> mapOrderItems(List<OrderItemView> itemViews) {
-        Map<Long, List<OrderItemResponse>> itemsByOrderId = new LinkedHashMap<>();
-        for (OrderItemView itemView : itemViews) {
-            itemsByOrderId.computeIfAbsent(itemView.getOrderId(), ignored -> new ArrayList<>())
-                    .add(new OrderItemResponse(
-                            itemView.getProductId(),
-                            itemView.getProductName(),
-                            itemView.getQuantity(),
-                            itemView.getPriceAtTime(),
-                            itemView.getDiscountAmount(),
-                            itemView.getTaxAmount(),
-                            itemView.getLineTotal()
-                    ));
-        }
-        return itemsByOrderId;
     }
 
     private record MergedItem(Long quantity, BigDecimal discountAmount) {

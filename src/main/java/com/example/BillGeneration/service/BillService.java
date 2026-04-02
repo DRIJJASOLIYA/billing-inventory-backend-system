@@ -7,7 +7,6 @@ import com.example.BillGeneration.entity.Bill;
 import com.example.BillGeneration.entity.BillItem;
 import com.example.BillGeneration.exception.ResourceNotFoundException;
 import com.example.BillGeneration.repository.BillRepository;
-import com.example.BillGeneration.repository.projection.BillItemView;
 import com.example.BillGeneration.repository.projection.BillSummaryView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,9 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class BillService {
@@ -116,11 +113,7 @@ public class BillService {
         if (summaries.isEmpty()) {
             return List.of();
         }
-        List<Long> billIds = summaries.stream()
-                .map(BillSummaryView::getBillId)
-                .toList();
-        Map<Long, List<BillItemResponse>> itemsByBillId = mapBillItems(billRepository.findBillItemsByBillIds(billIds));
-        List<BillDetailsResponse> responses = new ArrayList<>();
+        List<BillDetailsResponse> responses = new ArrayList<>(summaries.size());
         for (BillSummaryView summary : summaries) {
             responses.add(new BillDetailsResponse(
                     summary.getBillId(),
@@ -128,27 +121,10 @@ public class BillService {
                     summary.getBillDate(),
                     summary.getCustomerName(),
                     summary.getFinalAmount(),
-                    itemsByBillId.getOrDefault(summary.getBillId(), List.of())
+                    List.of()
             ));
         }
         return responses;
-    }
-
-    private Map<Long, List<BillItemResponse>> mapBillItems(List<BillItemView> itemViews) {
-        Map<Long, List<BillItemResponse>> itemsByBillId = new LinkedHashMap<>();
-        for (BillItemView itemView : itemViews) {
-            itemsByBillId.computeIfAbsent(itemView.getBillId(), ignored -> new ArrayList<>())
-                    .add(new BillItemResponse(
-                            itemView.getProductId(),
-                            itemView.getProductName(),
-                            itemView.getQuantity(),
-                            itemView.getPriceAtTime(),
-                            itemView.getDiscountAmount(),
-                            itemView.getTaxAmount(),
-                            itemView.getLineTotal()
-                    ));
-        }
-        return itemsByBillId;
     }
 
     private String safeCsv(String value) {
