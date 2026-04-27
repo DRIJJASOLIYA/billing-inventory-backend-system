@@ -1,6 +1,7 @@
 package com.example.BillGeneration.controller;
 
 import com.example.BillGeneration.exception.ApiExceptionHandler;
+import com.example.BillGeneration.service.AuditLogService;
 import com.example.BillGeneration.service.BillService;
 import com.example.BillGeneration.service.OrderService;
 import com.example.BillGeneration.service.ProductService;
@@ -36,6 +37,9 @@ class AdminControllerValidationTest {
 
     @MockBean
     private StockReportService stockReportService;
+
+    @MockBean
+    private AuditLogService auditLogService;
 
     @Test
     void getProductsPageShouldReturnBadRequestWhenSizeIsZero() throws Exception {

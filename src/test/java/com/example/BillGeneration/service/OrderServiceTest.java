@@ -1,7 +1,12 @@
 package com.example.BillGeneration.service;
 
 import com.example.BillGeneration.config.AppProperties;
+import com.example.BillGeneration.dto.OrderItemRequest;
+import com.example.BillGeneration.dto.OrderRequest;
+import com.example.BillGeneration.dto.OrderResponse;
 import com.example.BillGeneration.dto.OrderDetailsResponse;
+import com.example.BillGeneration.entity.OrderDetails;
+import com.example.BillGeneration.entity.Product;
 import com.example.BillGeneration.repository.BillRepository;
 import com.example.BillGeneration.repository.OrderRepository;
 import com.example.BillGeneration.repository.projection.OrderSummaryView;
@@ -14,11 +19,14 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.concurrent.CompletableFuture;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.contains;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -43,6 +51,51 @@ class OrderServiceTest {
 
     @Mock
     private AppProperties appProperties;
+
+    @Test
+    void placeOrderShouldReturnPaymentFailureWhenMockFailureIsEnabled() {
+        AppProperties properties = new AppProperties();
+        OrderService orderService = new OrderService(
+                productService,
+                orderRepository,
+                notificationService,
+                billRepository,
+                auditLogService,
+                "admin@example.com",
+                1,
+                properties
+        );
+        Product product = new Product();
+        product.setId(1L);
+        product.setName("Rice");
+        product.setPrice(new BigDecimal("119.99"));
+        product.setQuantity(10L);
+        product.setThreshold(2L);
+
+        OrderRequest request = new OrderRequest(
+                "Mock Failure",
+                "+919157576177",
+                List.of(new OrderItemRequest(1L, 1L, BigDecimal.ZERO))
+        );
+
+        when(productService.getProductsByIds(any())).thenReturn(Map.of(1L, product));
+        doAnswer(invocation -> {
+            OrderDetails order = invocation.getArgument(0);
+            if (order.getId() == null) {
+                order.setId(1L);
+            }
+            return order;
+        }).when(orderRepository).save(any(OrderDetails.class));
+
+        OrderResponse response = orderService.placeOrder(request, null);
+
+        assertEquals("PAYMENT_FAILED", response.getOrderStatus());
+        assertEquals("FAILED", response.getPaymentStatus());
+        assertEquals("Payment Failed. Please try again", response.getMessage());
+        verify(billRepository, never()).save(any());
+        verify(notificationService, never()).sendSms(any(), any());
+        verify(notificationService, never()).sendWhatsApp(any(), any());
+    }
 
     @Test
     void sendLowStockEmailSafelyShouldAuditSuccessfulEmail() throws Exception {

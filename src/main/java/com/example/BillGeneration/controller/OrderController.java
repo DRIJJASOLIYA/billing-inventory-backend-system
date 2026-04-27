@@ -3,6 +3,7 @@ package com.example.BillGeneration.controller;
 import com.example.BillGeneration.dto.OrderDetailsResponse;
 import com.example.BillGeneration.dto.OrderRequest;
 import com.example.BillGeneration.dto.OrderResponse;
+import com.example.BillGeneration.exception.BadRequestException;
 import com.example.BillGeneration.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,7 @@ public class OrderController {
     @PostMapping
     public OrderResponse placeOrder(
             @Valid @RequestBody OrderRequest request,
-            @RequestHeader(name = "X-Idempotency-Key", required = false) String idempotencyKey
+            @RequestHeader(name = "X-Idempotency-Key") String idempotencyKey
     ) {
         return submitOrder(request, idempotencyKey);
     }
@@ -37,6 +38,9 @@ public class OrderController {
     }
 
     private OrderResponse submitOrder(OrderRequest request, String idempotencyKey) {
+        if (idempotencyKey == null || idempotencyKey.isBlank()) {
+            throw new BadRequestException("X-Idempotency-Key header is required");
+        }
         return orderService.placeOrder(request, idempotencyKey);
     }
 

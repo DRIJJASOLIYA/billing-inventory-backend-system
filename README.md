@@ -55,6 +55,12 @@ This project is built to manage product inventory and customer orders through RE
 
 Example order request:
 
+```http
+POST /orders
+Content-Type: application/json
+X-Idempotency-Key: 8f4f1d2e-6a8d-4d65-a8a4-9d8c1b0f3a21
+```
+
 ```json
 {
   "customerName": "Riya Patel",
@@ -68,6 +74,11 @@ Example order request:
   ]
 }
 ```
+
+Notes:
+
+- `X-Idempotency-Key` is required for `POST /orders`
+- Scheduled stock, order, and bill CSV reports run daily at `12:00 AM`
 
 ## Performance Work
 
